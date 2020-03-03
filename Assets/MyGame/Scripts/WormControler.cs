@@ -15,18 +15,27 @@ public class WormControler : MonoBehaviour
     //public object Worm;
     public int x = 1;
     public float speed = 10f;
+    public float bulletForce = 350f;
     public Rigidbody Rigidbody_Worm;
+    public GameObject projectile;
+    public GameObject Rigidbody_Bullet;
+    public GameObject Bazooka;
+    public GameObject BulletSpawn;
+
+    //[SerializeField] private GameObject ABulletSpawn;
+    //[SerializeField] private GameObject ABazooka;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Rigidbody_Worm = GetComponent<Rigidbody>();
+        //Rigidbody_Bullet = GetComponent<Rigidbody>();
+
     }
     // Update is called once per frame
     void Update()
     {
-
-
         if (Input.GetKey(KeyCode.E))
         {
 
@@ -56,8 +65,15 @@ public class WormControler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space ist gedrückt!");
+            // Instantiate(projectile, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject clone = Instantiate(projectile, BulletSpawn.transform.position, BulletSpawn.transform.rotation);
+            Rigidbody pro = clone.GetComponent<Rigidbody>();
+            //clone.velocity = transform.TransformDirection(Vector3.forward * 10);
+            pro.AddForce(Bazooka.transform.up * bulletForce);
+
+            /*GameObject clone = Instantiate(projectile, BulletSpawn.transform.position, BulletSpawn.transform.rotation);
+            Rigidbody rbProjectile = clone.GetComponent<Rigidbody>();
+            rbProjectile.AddForce(Bazooka.transform.up * 400f);*/
         }
-
-
     }
 }

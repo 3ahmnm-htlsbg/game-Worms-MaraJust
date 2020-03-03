@@ -3,7 +3,12 @@ guid: b59a2fec29eb4487ba6629a80fbbbf05
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Rigidbody_Worm: {instanceID: 0}
+  - projectile: {fileID: 5441201274890429987, guid: 43b9b94be0e894c9491f4d4672a89b42,
+      type: 3}
+  - Rigidbody_Bullet: {instanceID: 0}
+  - Bazooka: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
