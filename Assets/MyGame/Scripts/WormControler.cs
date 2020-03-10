@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System.Net.Mime;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WormControler : MonoBehaviour
 {
@@ -13,67 +15,178 @@ public class WormControler : MonoBehaviour
     //
 
     //public object Worm;
-    public int x = 1;
+    //public int x = 1;
     public float speed = 10f;
     public float bulletForce = 350f;
-    public Rigidbody Rigidbody_Worm;
-    public GameObject projectile;
-    public GameObject Rigidbody_Bullet;
-    public GameObject Bazooka;
-    public GameObject BulletSpawn;
+    public Rigidbody Rigidbody_WormA;
+    public Rigidbody Rigidbody_WormB;
+    public GameObject projectileA;
+    public GameObject projectileB;
+    // public GameObject Rigidbody_Bullet;
+    public GameObject BazookaA;
+    public GameObject BazookaB;
+    public GameObject BulletSpawnA;
+    public GameObject BulletSpawnB;
 
-    //[SerializeField] private GameObject ABulletSpawn;
-    //[SerializeField] private GameObject ABazooka;
+    public int healthA = 10;
+    public int healthB = 10;
+
+    public Text HealthAText;
+    public Text HealthBText;
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        Rigidbody_Worm = GetComponent<Rigidbody>();
-        //Rigidbody_Bullet = GetComponent<Rigidbody>();
+        Rigidbody_WormA = GetComponent<Rigidbody>();
+        Rigidbody_WormB = GetComponent<Rigidbody>();
 
     }
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.E))
+
+        if (Rigidbody_WormA == true)
         {
+            if (Input.GetKey(KeyCode.E))
+            {
+                Debug.Log("E ist gedrückt!");
+                Rigidbody_WormA.AddForce(transform.right * speed);
+            }
 
-            Debug.Log("E ist gedrückt!");
-            Rigidbody_Worm.AddForce(transform.right * speed);
 
+            if (Input.GetKey(KeyCode.Q))
+            {
+                Debug.Log("Q ist gedrückt!");
+                Rigidbody_WormA.AddForce(-transform.right * speed);
+            }
+
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                Debug.Log("W ist gedrückt!");
+                Rigidbody_WormA.AddForce(transform.up * speed);
+            }
+
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("Space ist gedrückt!");
+                GameObject clone = Instantiate(projectileA, BulletSpawnA.transform.position, BulletSpawnA.transform.rotation);
+                Rigidbody proA = clone.GetComponent<Rigidbody>();
+                proA.AddForce(BazookaA.transform.up * bulletForce);
+            }
 
         }
 
-
-        if (Input.GetKey(KeyCode.Q))
+        if (Rigidbody_WormB == true)
         {
-            Debug.Log("Q ist gedrückt!");
-            Rigidbody_Worm.AddForce(-transform.right * speed);
 
+            if (Input.GetKey(KeyCode.I))
+            {
+
+                Debug.Log("O ist gedrückt!");
+                Rigidbody_WormB.AddForce(-transform.right * speed);
+
+
+            }
+
+
+            if (Input.GetKey(KeyCode.P))
+            {
+                Debug.Log("P ist gedrückt!");
+                Rigidbody_WormB.AddForce(transform.right * speed);
+
+            }
+
+
+            if (Input.GetKey(KeyCode.O))
+            {
+                Debug.Log("O ist gedrückt!");
+                Rigidbody_WormB.AddForce(transform.up * speed);
+
+            }
+
+
+            if (Input.GetKeyDown(KeyCode.RightShift))
+            {
+                Debug.Log("RightShift ist gedrückt!");
+                GameObject clone = Instantiate(projectileB, BulletSpawnB.transform.position, BulletSpawnB.transform.rotation);
+                Rigidbody proB = clone.GetComponent<Rigidbody>();
+                proB.AddForce(BazookaB.transform.up * bulletForce);
+
+
+            }
         }
 
+    }
 
-        if (Input.GetKey(KeyCode.W))
+    void OnCollisionEnter(Collision collision)
+    {
+        if (Rigidbody_WormA == true)
         {
-            Debug.Log("W ist gedrückt!");
-            Rigidbody_Worm.AddForce(transform.up * speed);
+            if (collision.gameObject.tag == "Projectile")
+            {
+                healthA = healthA - 1;
+                Debug.Log("Kollision Projectile");
+                HealthAText.text = healthA.ToString();
+            }
+            else
+            {
+                Debug.Log("Andere Kollision");
+            }
 
+            if (collision.gameObject.tag == "HealthPack")
+            {
+                healthA = healthA + 2;
+                Debug.Log("Healthpack!");
+                HealthAText.text = healthA.ToString();
+            }
+            else
+            {
+                Debug.Log("no Kollisison with Healthpack");
+            }
         }
-
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Rigidbody_WormB == true)
         {
-            Debug.Log("Space ist gedrückt!");
-            // Instantiate(projectile, new Vector3(0, 0, 0), Quaternion.identity);
-            GameObject clone = Instantiate(projectile, BulletSpawn.transform.position, BulletSpawn.transform.rotation);
-            Rigidbody pro = clone.GetComponent<Rigidbody>();
-            //clone.velocity = transform.TransformDirection(Vector3.forward * 10);
-            pro.AddForce(Bazooka.transform.up * bulletForce);
+            if (collision.gameObject.tag == "Projectile")
+            {
+                healthB = healthB - 1;
+                Debug.Log("Kollision Projectile");
+                HealthBText.text = healthB.ToString();
+            }
+            else
+            {
+                Debug.Log("Andere Kollision");
+            }
 
-            /*GameObject clone = Instantiate(projectile, BulletSpawn.transform.position, BulletSpawn.transform.rotation);
-            Rigidbody rbProjectile = clone.GetComponent<Rigidbody>();
-            rbProjectile.AddForce(Bazooka.transform.up * 400f);*/
+            if (collision.gameObject.tag == "HealthPack")
+            {
+                healthB = healthB + 2;
+                Debug.Log("Healthpack!");
+                HealthBText.text = healthB.ToString();
+            }
+            else
+            {
+                Debug.Log("no Kollisison with Healthpack");
+            }
         }
     }
+
+
 }
+
+
+//not used
+
+//[SerializeField] private GameObject ABulletSpawn;
+//[SerializeField] private GameObject ABazooka;
+
+/*GameObject clone = Instantiate(projectile, BulletSpawn.transform.position, BulletSpawn.transform.rotation);
+        Rigidbody rbProjectile = clone.GetComponent<Rigidbody>();
+        rbProjectile.AddForce(Bazooka.transform.up * 400f);*/
+
+//clone.velocity = transform.TransformDirection(Vector3.forward * 10);
+// Instantiate(projectile, new Vector3(0, 0, 0), Quaternion.identity);
