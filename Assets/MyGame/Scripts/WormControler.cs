@@ -1,4 +1,5 @@
-﻿using System.Net.Mime;
+﻿using System.Reflection;
+using System.Net.Mime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -66,6 +67,11 @@ public class WormControler : MonoBehaviour
             Rigidbody rigid = clone.GetComponent<Rigidbody>();
             rigid.AddForce(Bazooka.transform.up * bulletForce);
         }
+
+        /*if (health = 0)
+        {
+            Reset
+        }*/
     }
 
     void OnCollisionEnter(Collision collision)
