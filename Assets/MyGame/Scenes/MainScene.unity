@@ -428,21 +428,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59a2fec29eb4487ba6629a80fbbbf05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
   bulletForce: 350
-  Rigidbody_WormA: {fileID: 189549335}
-  Rigidbody_WormB: {fileID: 0}
-  projectileA: {fileID: 5441201274890429987, guid: 43b9b94be0e894c9491f4d4672a89b42,
+  RigidbodyWorm: {fileID: 189549335}
+  projectile: {fileID: 5441201274890429987, guid: 43b9b94be0e894c9491f4d4672a89b42,
     type: 3}
-  projectileB: {fileID: 0}
-  BazookaA: {fileID: 55377721}
-  BazookaB: {fileID: 0}
-  BulletSpawnA: {fileID: 445564977}
-  BulletSpawnB: {fileID: 0}
-  healthA: 10
-  healthB: 10
-  HealthAText: {fileID: 1938262032}
-  HealthBText: {fileID: 1625006058}
+  Bazooka: {fileID: 55377721}
+  BulletSpawn: {fileID: 445564977}
+  health: 10
+  HealthText: {fileID: 1938262032}
+  jumpUP: 119
+  left: 97
+  right: 100
+  shoot: 32
+  jumpForce: {x: 0, y: 200, z: 0}
+  moveForce: {x: 30, y: 0, z: 0}
 --- !u!136 &189549331
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1586,21 +1585,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59a2fec29eb4487ba6629a80fbbbf05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
   bulletForce: 350
-  Rigidbody_WormA: {fileID: 0}
-  Rigidbody_WormB: {fileID: 1533389086}
-  projectileA: {fileID: 0}
-  projectileB: {fileID: 5441201274890429987, guid: 43b9b94be0e894c9491f4d4672a89b42,
+  RigidbodyWorm: {fileID: 1533389086}
+  projectile: {fileID: 5441201274890429987, guid: 43b9b94be0e894c9491f4d4672a89b42,
     type: 3}
-  BazookaA: {fileID: 0}
-  BazookaB: {fileID: 266174605}
-  BulletSpawnA: {fileID: 0}
-  BulletSpawnB: {fileID: 610780065}
-  healthA: 10
-  healthB: 10
-  HealthAText: {fileID: 1938262032}
-  HealthBText: {fileID: 1625006058}
+  Bazooka: {fileID: 266174605}
+  BulletSpawn: {fileID: 610780065}
+  health: 10
+  HealthText: {fileID: 1625006058}
+  jumpUP: 105
+  left: 106
+  right: 108
+  shoot: 13
+  jumpForce: {x: 0, y: 0, z: 0}
+  moveForce: {x: 0, y: 0, z: 0}
 --- !u!136 &1533389088
 CapsuleCollider:
   m_ObjectHideFlags: 0
