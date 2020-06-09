@@ -41,6 +41,12 @@ public class HealthManager : MonoBehaviour
             Debug.Log("no Kollisison with Healthpack");
         }
 
+        if (health <= 0)
+        {
+            Debug.Log(health);
+
+        }
+
     }
 
 }
