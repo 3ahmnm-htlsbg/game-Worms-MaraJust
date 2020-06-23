@@ -1,9 +1,11 @@
-﻿using System.Reflection;
+﻿using System.Numerics;
+using System.Reflection;
 using System.Net.Mime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class WormControler : MonoBehaviour
 {
@@ -28,8 +30,8 @@ public class WormControler : MonoBehaviour
     public KeyCode right;
     public KeyCode shoot;
 
-    public Vector3 jumpForce;
-    public Vector3 moveForce;
+    public UnityEngine.Vector3 jumpForce;
+    public UnityEngine.Vector3 moveForce;
 
     // Start is called before the first frame update
     void Start()
@@ -63,15 +65,13 @@ public class WormControler : MonoBehaviour
         if (Input.GetKeyDown(shoot))
         {
             Debug.Log("Shoot!");
-            GameObject clone = Instantiate(projectile, BulletSpawn.transform.position, BulletSpawn.transform.rotation);
-            Rigidbody rigid = clone.GetComponent<Rigidbody>();
-            rigid.AddForce(Bazooka.transform.up * bulletForce);
+            StartCoroutine(bulletLife());
         }
 
-        /*if (health = 0)
-        {
-            Reset
-        }*/
+        /* if (health == 0f)
+         {
+             SceneManager.LoadScene("MainScene");
+         }*/
     }
 
     void OnCollisionEnter(Collision collision)
@@ -95,6 +95,16 @@ public class WormControler : MonoBehaviour
             Debug.Log("no Kcllisison with anything");
             HealthText.text = health.ToString();
         }
+    }
+
+    IEnumerator bulletLife()
+    {
+        GameObject clone = Instantiate(projectile, BulletSpawn.transform.position, BulletSpawn.transform.rotation);
+        Rigidbody rigid = clone.GetComponent<Rigidbody>();
+        rigid.AddForce(Bazooka.transform.up * bulletForce);
+        yield return new WaitForSeconds(2);
+        Destroy(clone);
+
     }
 }
 
