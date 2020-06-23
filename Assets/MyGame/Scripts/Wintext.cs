@@ -22,14 +22,14 @@ public class Wintext : MonoBehaviour
         if (PlayerA.health == 0)
         {
             WinText.enabled = true;
-            WinText.text = "Blau gewinnt!";
-            Invoke("LoadMainscene", 3f);
+            WinText.text = "Rot gewinnt!";
+            Invoke("LoadMainscene", 2f);
         }
         else if (PlayerB.health == 0)
         {
             WinText.enabled = true;
-            WinText.text = "Rot gewinnt!";
-            Invoke("LoadMainscene", 3f);
+            WinText.text = "Blau gewinnt!";
+            Invoke("LoadMainscene", 2f);
         }
     }
     void LoadMainscene()
